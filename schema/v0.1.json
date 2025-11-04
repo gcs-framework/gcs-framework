@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/gcs-framework/gcs-framework/refs/heads/main/schema/v1.json",
-  "$comment": "GCSF v1: minimal schema for pure-function style tests. Invariants/env come later.",
-  "title": "GCSF Spec v1",
+  "$id": "https://raw.githubusercontent.com/gcs-framework/gcs-framework/refs/heads/main/schema/v0.1.json",
+  "$comment": "GCSF v0.1: Pre-release schema for pure-function style tests. Breaking changes may occur before v1.0. Invariants/env come later.",
+  "title": "GCSF Spec v0.1",
   "type": "object",
   "required": ["spec", "version", "groups"],
   "additionalProperties": true,

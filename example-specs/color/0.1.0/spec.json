@@ -1,7 +1,7 @@
 {
   "spec": "color",
   "version": "0.1.0",
-  "schema": "https://raw.githubusercontent.com/gcs-framework/gcs-framework/refs/heads/main/schema/v1.json",
+  "schema": "https://raw.githubusercontent.com/gcs-framework/gcs-framework/refs/heads/main/schema/v0.1.json",
   "groups": [
     {
       "group": "conversion",

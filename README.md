@@ -7,11 +7,13 @@ GCSF defines a portable, machine-readable format for describing how software sho
 ## What is GCSF?
 
 GCSF is an open standard that provides:
-- **A schema** ([`schema/v1.json`](schema/v1.json)) — defines the structure of conformance specifications
+- **A schema** ([`schema/v0.1.json`](schema/v0.1.json)) — defines the structure of conformance specifications
 - **Reference runners** ([`runners/`](runners/)) — demonstrate how to execute specs in specific languages
 - **Example specs** ([`example-specs/`](example-specs/)) — show what conformance specs look like
 
 The spec is the portable artifact. Implementations (human-written or AI-generated) prove conformance by passing the tests.
+
+> **Note:** GCSF is currently at v0.x (pre-release). The schema and features may change based on feedback before v1.0 is released.
 
 ## Who is this for?
 
@@ -91,13 +93,13 @@ Total: 17 | Pass: 16 | Fail: 0 | Skip: 1 | Error: 0
 
 ## Creating a Spec
 
-Specs are JSON files following the [v1 schema](schema/v1.json). Minimal example:
+Specs are JSON files following the [v0.1 schema](schema/v0.1.json). Minimal example:
 
 ```json
 {
   "spec": "my-spec",
   "version": "0.1.0",
-  "schema": "https://raw.githubusercontent.com/gcs-framework/gcs-framework/refs/heads/main/schema/v1.json",
+  "schema": "https://raw.githubusercontent.com/gcs-framework/gcs-framework/refs/heads/main/schema/v0.1.json",
   "groups": [
     {
       "group": "math",
@@ -211,11 +213,12 @@ The `example-specs/` directory contains examples only, not blessed/maintained sp
 
 ## Schema Versioning
 
-- Major versions: `v1.json`, `v2.json` (breaking changes)
+- Pre-release: `v0.x.json` (breaking changes allowed before v1.0)
+- Stable major versions: `v1.json`, `v2.json` (breaking changes bump major version)
 - Non-breaking additions stay within same major version
 - Specs declare their schema version via the `schema` field
 
-Current version: **v1** (pure function tests with compare modes)
+Current version: **v0.1** (pre-release, pure function tests with compare modes)
 
 Future versions may add:
 - Stateful test sequences
@@ -237,6 +240,8 @@ MIT — See [LICENSE](LICENSE) file.
 
 ---
 
-**Status:** Early draft / experimental
+**Status:** v0.1 pre-release — seeking feedback before v1.0
 
-For questions or discussion, open an issue.
+GCSF is functional but the schema may evolve based on community input. Breaking changes are possible before v1.0.
+
+For questions, feedback, or discussion, open an issue.
