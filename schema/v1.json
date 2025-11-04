@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/gcs-framework/gcs-framework/refs/heads/main/schema/v1.json",
+  "$comment": "GCSF v1: minimal schema for pure-function style tests. Invariants/env come later.",
+  "title": "GCSF Spec v1",
+  "type": "object",
+  "required": ["spec", "version", "groups"],
+  "additionalProperties": true,
+  "properties": {
+    "spec": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[A-Za-z0-9\\.]+)?$"
+    },
+    "schema": {
+      "type": "string"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "compare": {
+          "type": "string",
+          "enum": ["strict", "deep", "approx"]
+        },
+        "tolerance": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "abs": {
+                  "type": "number"
+                },
+                "rel": {
+                  "type": "number"
+                },
+                "fields": {
+                  "type": "object"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "groups": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/group"
+      }
+    }
+  },
+  "$defs": {
+    "group": {
+      "type": "object",
+      "required": ["group"],
+      "additionalProperties": true,
+      "properties": {
+        "group": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "defaults": {
+          "$ref": "#/properties/defaults"
+        },
+        "groups": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/group"
+          }
+        },
+        "tests": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/test"
+          }
+        }
+      },
+      "anyOf": [
+        {
+          "required": ["groups"]
+        },
+        {
+          "required": ["tests"]
+        }
+      ]
+    },
+    "test": {
+      "type": "object",
+      "required": ["id", "op", "input", "expected"],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["case"]
+        },
+        "op": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input": {},
+        "expected": {},
+        "description": {
+          "type": "string"
+        },
+        "compare": {
+          "type": "string",
+          "enum": ["strict", "deep", "approx"]
+        },
+        "tolerance": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "abs": {
+                  "type": "number"
+                },
+                "rel": {
+                  "type": "number"
+                },
+                "fields": {
+                  "type": "object"
+                }
+              }
+            }
+          ]
+        },
+        "xfail": {
+          "type": "boolean"
+        },
+        "skip": {
+          "type": "string"
+        },
+        "meta": {}
+      }
+    }
+  }
+}
