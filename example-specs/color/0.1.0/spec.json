@@ -1,0 +1,160 @@
+{
+  "spec": "color",
+  "version": "0.1.0",
+  "schema": "https://raw.githubusercontent.com/gcs-framework/gcs-framework/refs/heads/main/schema/v1.json",
+  "groups": [
+    {
+      "group": "conversion",
+      "description": "Color space conversion operations",
+      "groups": [
+        {
+          "group": "hex_to_rgb",
+          "description": "Convert hex color strings to RGB objects",
+          "tests": [
+            {
+              "id": "turquoise",
+              "op": "hex_to_rgb",
+              "input": { "hex": "#40E0D0" },
+              "expected": { "r": 64, "g": 224, "b": 208 }
+            },
+            {
+              "id": "black",
+              "op": "hex_to_rgb",
+              "input": { "hex": "#000000" },
+              "expected": { "r": 0, "g": 0, "b": 0 }
+            },
+            {
+              "id": "white",
+              "op": "hex_to_rgb",
+              "input": { "hex": "#FFFFFF" },
+              "expected": { "r": 255, "g": 255, "b": 255 }
+            },
+            {
+              "id": "red",
+              "op": "hex_to_rgb",
+              "input": { "hex": "#FF0000" },
+              "expected": { "r": 255, "g": 0, "b": 0 }
+            }
+          ]
+        },
+        {
+          "group": "rgb_to_hex",
+          "description": "Convert RGB objects to hex color strings",
+          "tests": [
+            {
+              "id": "turquoise",
+              "op": "rgb_to_hex",
+              "input": { "r": 64, "g": 224, "b": 208 },
+              "expected": { "hex": "#40E0D0" }
+            },
+            {
+              "id": "black",
+              "op": "rgb_to_hex",
+              "input": { "r": 0, "g": 0, "b": 0 },
+              "expected": { "hex": "#000000" }
+            },
+            {
+              "id": "white",
+              "op": "rgb_to_hex",
+              "input": { "r": 255, "g": 255, "b": 255 },
+              "expected": { "hex": "#FFFFFF" }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "group": "luminance",
+      "description": "Relative luminance calculations",
+      "defaults": {
+        "compare": "approx",
+        "tolerance": { "abs": 0.01, "rel": 0.001 }
+      },
+      "tests": [
+        {
+          "id": "black",
+          "op": "luminance",
+          "input": { "r": 0, "g": 0, "b": 0 },
+          "expected": { "value": 0.0 },
+          "description": "Black has zero luminance"
+        },
+        {
+          "id": "white",
+          "op": "luminance",
+          "input": { "r": 255, "g": 255, "b": 255 },
+          "expected": { "value": 1.0 },
+          "description": "White has maximum luminance"
+        },
+        {
+          "id": "red",
+          "op": "luminance",
+          "input": { "r": 255, "g": 0, "b": 0 },
+          "expected": { "value": 0.2126 },
+          "description": "Red channel contributes ~21% to luminance"
+        },
+        {
+          "id": "mid_gray",
+          "op": "luminance",
+          "input": { "r": 128, "g": 128, "b": 128 },
+          "expected": { "value": 0.215 },
+          "description": "Mid-gray luminance",
+          "compare": "strict",
+          "xfail": true
+        }
+      ]
+    },
+    {
+      "group": "validation",
+      "description": "Color format validation",
+      "tests": [
+        {
+          "id": "valid_hex",
+          "op": "is_valid_hex",
+          "input": { "hex": "#40E0D0" },
+          "expected": { "valid": true },
+          "description": "Standard 6-digit hex color"
+        },
+        {
+          "id": "invalid_hex_length",
+          "op": "is_valid_hex",
+          "input": { "hex": "#40E" },
+          "expected": { "valid": false }
+        },
+        {
+          "id": "invalid_hex_chars",
+          "op": "is_valid_hex",
+          "input": { "hex": "#GGGGGG" },
+          "expected": { "valid": false }
+        }
+      ]
+    },
+    {
+      "group": "transforms",
+      "description": "Color transformations and utilities",
+      "tests": [
+        {
+          "id": "rgb_to_array",
+          "op": "rgb_to_array",
+          "input": { "r": 64, "g": 224, "b": 208 },
+          "expected": [64, 224, 208],
+          "description": "Convert RGB object to array"
+        },
+        {
+          "id": "invert_color",
+          "op": "invert_color",
+          "input": { "r": 64, "g": 224, "b": 208 },
+          "expected": { "r": 191, "g": 31, "b": 47 },
+          "description": "Invert RGB color"
+        },
+        {
+          "id": "hsl_to_rgb",
+          "op": "hsl_to_rgb",
+          "input": { "h": 174, "s": 72, "l": 56 },
+          "expected": { "r": 64, "g": 224, "b": 208 },
+          "skip": "HSL conversion not yet implemented"
+        }
+      ]
+    }
+  ]
+}
+

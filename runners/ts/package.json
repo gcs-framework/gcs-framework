@@ -1,0 +1,26 @@
+{
+  "name": "@gcsf/runner-ts",
+  "version": "0.1.0",
+  "description": "GCSF TypeScript reference runner - minimal implementation",
+  "main": "runner.ts",
+  "bin": {
+    "gcsf-run": "./runner.ts"
+  },
+  "scripts": {
+    "build": "tsc",
+    "example": "tsx runner.ts ../../example-specs/color/0.1.0/spec.json ./example-impl.ts"
+  },
+  "keywords": [
+    "gcsf",
+    "testing",
+    "conformance"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}
+
