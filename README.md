@@ -190,24 +190,6 @@ export function add(input: { a: number, b: number }) {
 }
 ```
 
-## Project Structure
-
-```
-gcs-framework/
-├── schema/
-│   └── v1.json              # Schema definition
-├── example-specs/
-│   └── color/0.1.0/         # Example spec (not maintained)
-│       └── spec.json
-├── runners/
-│   └── ts/                  # TypeScript reference runner
-│       ├── runner.ts        # Main implementation
-│       ├── example-impl.ts  # Test fixture
-│       └── README.md
-├── LICENSE                  # MIT
-└── README.md
-```
-
 ## Important Notes
 
 ### Runners are reference implementations
